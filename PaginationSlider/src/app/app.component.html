@@ -1,24 +1,43 @@
 <div>
-  <h2>{{images[currentPage].title}}</h2>
+  <h2 [appClass]="'orange'" >{{images[currentPage].title}}</h2>
   <img [src]="images[currentPage].url" alt="" style="max-width: 300px;max-height: 300px;">
 </div>
 <br>
 <nav aria-label="...">
   <ul class="pagination">
-    <li class="page-item " [ngClass]="{disabled : currentPage ===0}">
-      <a (click)="changePage()" class="page-link" href="#">Previous</a>
+    <li   class="page-item " [appSetClass]="{disabled : currentPage ===0}">
+      <a [ngStyle]="{backgroundColor : currentPage===0 ? 'red' : 'yellow'}" (click)="changePage()" class="page-link" href="#">Previous</a>
     </li>
-    <ng-container *ngFor="let image of images;let i = index">
-      <li class="page-item" *ngIf="checkWindowIndex(i)" [ngClass]="setActiveClass(i)" >
+    <ng-container *appTimes="images.length;let i = index">
+      <li class="page-item" *ngIf="checkWindowIndex(i)" [appSetClass]="{ active : i=== currentPage }" >
         <a (click)="currentPage=i" class="page-link" href="#">{{i+1}}</a>
       </li>
     </ng-container>
-    <li class="page-item" [ngClass]="{disabled : currentPage===images.length-1}">
+    <li class="page-item" [appSetClass]="{disabled : currentPage===images.length-1}">
       <a (click)="currentPage=currentPage+1" class="page-link" href="#">Next</a>
     </li>
   </ul>
 </nav>
 <hr>
+<!-- <br>
+<ul *appTimes="2">
+  <li>test 1</li>
+  <li>test 2</li>
+  <li>test 3</li>
+</ul>
+<br> -->
+<div [ngSwitch]="currentPage">
+  <div *ngSwitchCase="0">
+    this page is zero
+  </div>
+  <div *ngSwitchCase="1">
+    this page is one
+  </div>
+  <div *ngSwitchDefault>
+    this page is default
+  </div>
+</div>
+<br>
 <p *ngIf="isExist;else custom">this is if</p>
 <ng-template #custom>
   <p>this is else</p>

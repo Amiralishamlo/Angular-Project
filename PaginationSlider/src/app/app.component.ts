@@ -16,8 +16,8 @@ export class AppComponent {
     // return '';
   }
   checkWindowIndex(index: number) : boolean {
-    console.log('currentPage :'+this.currentPage);
-    console.log('index:'+index);
+    // console.log('currentPage :'+this.currentPage);
+    // console.log('index:'+index);
     return Math.abs(this.currentPage - index) < 5;
   }
   changePage() {
